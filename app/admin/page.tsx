@@ -12,9 +12,14 @@ export default async function AdminPage() {
   const isLoggedIn  = token === correct;
 
   let data: Inquiry[] = [];
+  let fetchError = '';
   if (isLoggedIn) {
-    try { data = await getInquiries(); } catch { /* env not set yet */ }
+    try {
+      data = await getInquiries();
+    } catch (e) {
+      fetchError = e instanceof Error ? e.message : String(e);
+    }
   }
 
-  return <AdminClient initialData={data} isLoggedIn={isLoggedIn} />;
+  return <AdminClient initialData={data} isLoggedIn={isLoggedIn} fetchError={fetchError} />;
 }

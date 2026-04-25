@@ -110,7 +110,7 @@ function StatusSelect({ inquiry, onUpdate }: { inquiry: Inquiry; onUpdate: (id: 
   );
 }
 
-export default function AdminClient({ initialData, isLoggedIn }: { initialData: Inquiry[]; isLoggedIn: boolean }) {
+export default function AdminClient({ initialData, isLoggedIn, fetchError }: { initialData: Inquiry[]; isLoggedIn: boolean; fetchError?: string }) {
   const [inquiries, setInquiries] = useState(initialData);
   const [filter, setFilter] = useState<'all' | Inquiry['status']>('all');
   const [search, setSearch] = useState('');
@@ -162,6 +162,13 @@ export default function AdminClient({ initialData, isLoggedIn }: { initialData: 
       </div>
 
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(20px,3vw,40px) clamp(16px,3vw,32px)' }}>
+
+        {/* Error banner */}
+        {fetchError && (
+          <div style={{ marginBottom: 20, padding: '14px 18px', background: '#FFF0F0', borderRadius: 12, borderRight: `3px solid #E53E3E`, fontSize: 13, color: '#C53030', fontFamily: 'Tajawal, sans-serif', direction: 'ltr' }}>
+            ⚠️ Error loading inquiries: {fetchError}
+          </div>
+        )}
 
         {/* Stat cards */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 16, marginBottom: 28 }}>
