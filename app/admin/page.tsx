@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers';
 import { getInquiries } from '@/app/actions/inquiries';
+import type { Inquiry } from '@/lib/supabase';
 import AdminClient from './AdminClient';
 
 export const dynamic = 'force-dynamic';
@@ -10,9 +11,9 @@ export default async function AdminPage() {
   const correct     = process.env.ADMIN_PASSWORD ?? 'hwt-admin-2026';
   const isLoggedIn  = token === correct;
 
-  let data = [];
+  let data: Inquiry[] = [];
   if (isLoggedIn) {
-    try { data = await getInquiries() as never[]; } catch { /* env not set yet */ }
+    try { data = await getInquiries(); } catch { /* env not set yet */ }
   }
 
   return <AdminClient initialData={data} isLoggedIn={isLoggedIn} />;
