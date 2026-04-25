@@ -12,7 +12,7 @@ export async function submitInquiry(data: {
   travelers: string;
   notes: string;
 }) {
-  const { error } = await supabase.from('inquiries').insert({
+  const { error } = await supabase().from('inquiries').insert({
     name:        data.name,
     phone:       data.phone,
     destination: data.destination,
