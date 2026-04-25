@@ -1,26 +1,148 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-navy: #1E3A5F;
+  --color-navy-dark: #0F2340;
+  --color-navy-deep: #081A33;
+  --color-orange: #F5A524;
+  --color-orange-light: #FFB84D;
+  --color-orange-dark: #D88B0F;
+  --color-cream: #FFF9EE;
+  --color-ink: #0B1730;
+  --color-muted: #5A6A82;
+  --font-tajawal: 'Tajawal', sans-serif;
+  --font-poppins: 'Poppins', sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #FFF9EE;
+  color: #0B1730;
+  overflow-x: hidden;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+* {
+  box-sizing: border-box;
 }
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+h1, h2, h3, h4, p {
+  margin: 0;
+}
+
+input, select, textarea {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 15px;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid #F5A524;
+  outline-offset: 1px;
+}
+
+/* ── Form input premium focus states ─────────────────────────── */
+.hwt-input:focus {
+  outline: none;
+  border-color: #F5A524;
+  background: #FFFDF7;
+  box-shadow: 0 0 0 3px rgba(245,165,36,0.12);
+}
+
+/* ── Destination quick-select chips ──────────────────────────── */
+.dest-chip {
+  padding: 7px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 700;
+  border: 1.5px solid rgba(30,58,95,0.15);
+  background: #fff;
+  color: #1E3A5F;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.dest-chip:hover {
+  border-color: #F5A524;
+  background: #FFF9EE;
+}
+.dest-chip.active {
+  border-color: #F5A524;
+  background: #F5A524;
+  color: #fff;
+}
+
+/* ── Pulse animation for live indicator dot ─────────────────── */
+@keyframes hwt-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(0.8); }
+}
+.hwt-pulse { animation: hwt-pulse 2s ease-in-out infinite; }
+
+/* ── Responsive grid helpers ─────────────────────────────────── */
+
+/* 2-column equal */
+.rg-2 { display: grid; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .rg-2 { grid-template-columns: 1fr 1fr; } }
+
+/* 3-column equal */
+.rg-3 { display: grid; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .rg-3 { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .rg-3 { grid-template-columns: 1fr 1fr 1fr; } }
+
+/* Hero: text 1.1fr / image 1fr */
+.rg-hero { display: grid; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .rg-hero { grid-template-columns: 1.1fr 1fr; } }
+
+/* WhyUs: image 1fr / text 1.1fr */
+.rg-why { display: grid; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .rg-why { grid-template-columns: 1fr 1.1fr; } }
+
+/* 2×2 highlights inside WhyUs */
+.rg-highlights { display: grid; grid-template-columns: 1fr; }
+@media (min-width: 480px) { .rg-highlights { grid-template-columns: 1fr 1fr; } }
+
+/* CTA: text 1.3fr / contact 1fr */
+.rg-cta { display: grid; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .rg-cta { grid-template-columns: 1.3fr 1fr; } }
+
+/* Packages BigCard: image + text */
+.rg-bigcard { display: grid; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .rg-bigcard { grid-template-columns: 1fr 1fr; } }
+
+/* Packages CTA strip: text + button */
+.rg-pkg-cta { display: grid; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .rg-pkg-cta { grid-template-columns: 1fr auto; } }
+
+/* Fares trust strip */
+.rg-trust { display: grid; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .rg-trust { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .rg-trust { grid-template-columns: 1fr 1fr 1fr auto; } }
+
+/* Request page: form + sidebar */
+.rg-request { display: grid; grid-template-columns: 1fr; }
+@media (min-width: 1024px) { .rg-request { grid-template-columns: 1.4fr 1fr; } }
+
+/* Footer */
+.rg-footer { display: grid; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .rg-footer { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .rg-footer { grid-template-columns: 2fr 1fr 1fr 1.3fr; } }
+
+/* Inquiry form */
+.rg-form { display: grid; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .rg-form { grid-template-columns: 1fr 1fr; } }
+
+/* Nav: hide on mobile, show on desktop */
+.nav-desktop { display: none; }
+@media (min-width: 768px) { .nav-desktop { display: flex; } }
+
+.nav-cta { display: none; }
+@media (min-width: 768px) { .nav-cta { display: inline-flex; } }
+
+.nav-hamburger { display: flex; }
+@media (min-width: 768px) { .nav-hamburger { display: none; } }
